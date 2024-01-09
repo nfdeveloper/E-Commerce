@@ -9,6 +9,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import br.com.nfdeveloper.ecommerce_api.service.jwt.UserDetailsServiceImpl;
 import br.com.nfdeveloper.ecommerce_api.utils.JwtUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -18,11 +19,11 @@ import jakarta.servlet.http.HttpServletResponse;
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter{
 
-	private final UserDetailServiceImpl userDetailService;
+	private final UserDetailsServiceImpl userDetailService;
 	
 	private final JwtUtil jwtUtil;
 	
-	public JwtRequestFilter(UserDetailServiceImpl userDetailService, JwtUtil jwtUtil) {
+	public JwtRequestFilter(UserDetailsServiceImpl userDetailService, JwtUtil jwtUtil) {
 		super();
 		this.userDetailService = userDetailService;
 		this.jwtUtil = jwtUtil;
