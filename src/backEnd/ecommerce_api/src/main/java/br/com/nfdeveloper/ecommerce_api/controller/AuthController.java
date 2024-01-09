@@ -69,6 +69,7 @@ public class AuthController {
 					.toString()
 					);
 			
+			// Adiciona ao Header
 			response.addHeader(HEADER_STRING, TOKEN_PREFIX + jwt);
 		}
 	}
