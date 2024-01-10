@@ -41,6 +41,7 @@ public class AuthServiceImpl implements AuthService{
 		return userRepository.findFirstByEmail(email).isPresent();
 	}
 	
+	/*
 	@PostConstruct
 	public void createAdminAccount() {
 		User adminAccount = userRepository.findByRole(UserRole.ADMIN);
@@ -53,4 +54,5 @@ public class AuthServiceImpl implements AuthService{
 			userRepository.save(user);
 		}
 	}
+	*/
 }
