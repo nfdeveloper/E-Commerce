@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { UserStorageService } from '../services/storage/user-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,7 @@ export class LoginComponent {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private snackBar: MatSnackBar,
-    private Router: Router
+    private router: Router
   ){}
 
   ngOnInit(): void{
@@ -39,7 +40,14 @@ export class LoginComponent {
 
     this.authService.login(username, password).subscribe(
       (res) => {
-        this.snackBar.open('Bem vindo!', 'Ok', { duration: 5000 });
+        if(UserStorageService.isAdminLoggedIn()){
+          this.router.navigateByUrl('admin/dashboard');
+          this.snackBar.open('Bem vindo!', 'Ok', { duration: 5000 });
+        }
+        else if(UserStorageService.isCustomerLoggedIn()){
+          this.router.navigateByUrl('customer/dashboard');
+          this.snackBar.open('Bem vindo!', 'Ok', { duration: 5000 });
+        }
       },
       (error) => {
         this.snackBar.open('Usuário e/ou senha inválidos', 'ERROR', { duration: 5000 });
